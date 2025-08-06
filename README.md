@@ -3,12 +3,11 @@
 import pandas as pd
 import re
 
-# Load IOCs
 def load_iocs(ioc_file):
     with open(ioc_file, 'r') as file:
         return [line.strip() for line in file.readlines()]
 
-# Search for IOCs in log fields
+ Search for IOCs in log fields
 def search_logs(log_df, iocs):
     matches = []
     for idx, row in log_df.iterrows():
@@ -19,12 +18,11 @@ def search_logs(log_df, iocs):
                     break
     return matches
 
-# Load logs
+ 
 logs = pd.read_csv("logs.csv")
 iocs = load_iocs("iocs.txt")
 alerts = search_logs(logs, iocs)
 
-# Output alerts
 if alerts:
     print(f"\n🚨 Detected {len(alerts)} suspicious events:")
     for alert in alerts:
